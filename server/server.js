@@ -5,6 +5,7 @@ const cors = require("cors");
 
 const authRoutes = require("./routes/authRoutes");
 const eventRoutes = require("./routes/eventRoutes");
+const registrationRoutes = require("./routes/registrationRoutes");
 
 const app = express();
 
@@ -20,6 +21,7 @@ app.get("/api/test", (req,res) => {
 
 app.use("/api", authRoutes);
 app.use("/api/events", eventRoutes);
+app.use("/api/register", registrationRoutes);
 
 app.listen(process.env.PORT, () => {
     console.log(`Server is running on port ${process.env.PORT}`);

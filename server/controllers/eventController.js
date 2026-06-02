@@ -37,12 +37,12 @@ const getAllEvents = (req, res) => {
     });
 };
 
-const createEvent = (req, res) =>{
-    const { name, date, venue, capacity} = req.body;
+const createEvent = (req, res) => {
+    const { name, date, venue, capacity } = req.body;
 
-    if(!name || !date || !venue || !capacity){
+    if (!name || !date || !venue || !capacity) {
         return res.status(400).json({
-            messag : "All fileds required!"
+            messag: "All fields required!"
         });
     }
 
@@ -51,8 +51,8 @@ const createEvent = (req, res) =>{
     VALUES (?, ?, ?, ?)
     `;
 
-    db.query(query, [name, date, event, capacity], (err,result) => {
-        if(err){
+    db.query(query, [name, date, venue, capacity], (err, result) => {
+        if (err) {
             return res.status(500).json({
                 message: "Database error"
             });
@@ -60,7 +60,7 @@ const createEvent = (req, res) =>{
 
         res.json({
             message: "Event created successfully",
-            eventId:result.insertId
+            eventId: result.insertId
         });
     });
 };
@@ -89,8 +89,41 @@ const getEventById = (req, res) => {
     });
 };
 
+const getEventRegistrations = (req, res) => {
+    const { id } = req.params;
+
+    const query =
+        `
+            SELECT
+                u.id,
+                u.name,
+                u.username,
+                e.name AS eventName
+            FROM registrations r
+            JOIN users u
+                ON r.user_id = u.id
+            JOIN events e
+                ON r.event_id = e.id
+            WHERE e.id = ?
+            ORDER BY u.name ASC
+            `;
+
+    db.query(query, [id], (err, results) => {
+        if (err) {
+            console.error(err);
+
+            return res.status(500).json({
+                message: "Database error"
+            });
+        }
+
+        res.json(results);
+    });
+};
+
 module.exports = {
     getAllEvents,
     createEvent,
-    getEventById
+    getEventById,
+    getEventRegistrations
 };

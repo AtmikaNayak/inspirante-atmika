@@ -32,12 +32,6 @@ const login = (req, res) => {
             });
         }
 
-        const getProfile = (req, res) => {
-            res.json({
-                user: req.user
-            });
-        };
-
         const token = jwt.sign(
             {
                 id: user.id,
@@ -58,6 +52,12 @@ const login = (req, res) => {
                 role: user.role
             }
         });
+    });
+};
+
+const getProfile = (req, res) => {
+    res.json({
+        user: req.user
     });
 };
 
