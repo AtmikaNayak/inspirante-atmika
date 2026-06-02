@@ -148,7 +148,7 @@ button:hover{
 }
 
 .error{
-    color:#9333ea;
+    color:#ff0000;
     font-size:13px;
     margin-top:6px;
 }
@@ -156,7 +156,9 @@ button:hover{
 #message{
     font-size:13px;
     margin-top:8px;
-    color:#4a3580;
+    color:hsl(0, 100%, 49%);
+    display:flex;
+    justify-content: center;
 }
 
 #createMessage{
