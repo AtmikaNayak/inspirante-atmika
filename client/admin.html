@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="top-bar">
+            <h1>Admin Dashboard</h1>
+            <button id="logoutBtn">Logout</button>
+        </div>
+        <hr>
+        <div class="create-event">
+            <h2>Create Event</h2>
+            <input type="text" id="eventName" placeholder="Event Name">
+            <input type="date" id="eventDate">
+            <input type="text" id="eventVenue" placeholder="Venue">
+            <input type="number" id="eventCapacity" placeholder="Capacity">
+            <button id="createEventBtn">Create Event</button>
+            <p id="createMessage">
+
+            </p>
+        </div>
+        <hr>
+        <div class="events-list">
+            <h2>All Events</h2>
+            <div id="eventsContainer">
+
+            </div>
+        </div>
+        <hr>
+        <div class="view-registrations">
+            <h2>Event Registrations</h2>
+            <div id="registrationsContainer">
+                Select an event to view registrations
+            </div>
+        </div>
+    </div>
+    <script src="js/admin.js"></script>
+</body>
+
+</html>

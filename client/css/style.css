@@ -1,0 +1,256 @@
+*{
+    margin:0px;
+    padding:0px;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+    background-color:#f3f0ff;
+}
+
+.container{
+    width:60%;
+    margin:60px auto;
+    background-color:#ffffff;
+    padding:38px;
+    border-radius:16px;
+    border:1px solid #d8ccff;
+    box-shadow:0px 6px 24px rgba(99,60,220,0.1);
+}
+
+h1{
+    font-size:23px;
+    font-weight:700;
+    color:#2d1b6e;
+    margin-bottom:6px;
+}
+
+h2{
+    font-size:16px;
+    font-weight:600;
+    color:#3d2a8a;
+    margin-bottom:14px;
+}
+
+hr{
+    border:none;
+    border-top:1px solid #e8e0ff;
+    margin:22px 0px;
+}
+
+.top-bar{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-end;
+    margin-bottom:4px;
+}
+
+label{
+    font-size:13px;
+    font-weight:600;
+    color:#4a3580;
+    display:block;
+    margin-bottom:5px;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="date"],
+input[type="number"]{
+    width:100%;
+    padding:11px 14px;
+    font-size:14px;
+    border:1.5px solid #c4b5fd;
+    border-radius:9px;
+    outline:none;
+    margin-bottom:14px;
+    color:#2d1b6e;
+    background-color:#faf8ff;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="date"]:focus,
+input[type="number"]:focus{
+    border-color:#7c3aed;
+    background-color:#fff;
+}
+
+input[type="text"]:hover,
+input[type="password"]:hover,
+input[type="date"]:hover,
+input[type="number"]:hover{
+    border-color:#a78bfa;
+}
+
+button{
+    width:100%;
+    padding:12px;
+    font-size:14px;
+    font-weight:600;
+    border:none;
+    border-radius:9px;
+    cursor:pointer;
+    background-color:#7c3aed;
+    color:#fff;
+    margin-top:4px;
+}
+
+button:hover{
+    background-color:#6d28d9;
+}
+
+#login-header{
+    font-size:21px;
+    font-weight:700;
+    color:#2d1b6e;
+    margin-bottom:20px;
+}
+
+.login-box{
+    margin-top:10px;
+}
+
+#loginBtn{
+    margin-top:6px;
+    background-color:#7c3aed;
+}
+
+#loginBtn:hover{
+    background-color:#6d28d9;
+}
+
+#logoutBtn{
+    width:auto;
+    padding:7px 16px;
+    font-size:12px;
+    font-weight:600;
+    background-color:#ede9fe;
+    color:#5b21b6;
+    border:1.5px solid #c4b5fd;
+    border-radius:7px;
+    margin-top:0px;
+}
+
+#logoutBtn:hover{
+    background-color:#ddd6fe;
+    color:#4c1d95;
+}
+
+#createEventBtn{
+    margin-top:10px;
+    background-color:#7c3aed;
+}
+
+#createEventBtn:hover{
+    background-color:#6d28d9;
+}
+
+.error{
+    color:#9333ea;
+    font-size:13px;
+    margin-top:6px;
+}
+
+#message{
+    font-size:13px;
+    margin-top:8px;
+    color:#4a3580;
+}
+
+#createMessage{
+    font-size:13px;
+    margin-top:6px;
+    color:#7c3aed;
+    font-weight:500;
+}
+
+.upcoming-events,
+.my-registrations,
+.create-event,
+.events-list,
+.view-registrations{
+    margin-top:4px;
+}
+
+#eventsContainer,
+#myRegistrationsContainer,
+#registrationsContainer{
+    margin-top:10px;
+}
+
+.event-card{
+    border:1.5px solid #ddd6fe;
+    border-radius:12px;
+    padding:18px;
+    margin-bottom:14px;
+    background-color:#faf8ff;
+}
+
+.event-card h3{
+    font-size:15px;
+    font-weight:700;
+    color:#2d1b6e;
+    margin-bottom:7px;
+}
+
+.event-card p{
+    font-size:13px;
+    color:#6b5b9e;
+    margin-bottom:4px;
+}
+
+.event-card button{
+    width:auto;
+    padding:8px 16px;
+    font-size:13px;
+    margin-top:10px;
+    margin-right:8px;
+    border-radius:7px;
+    background-color:#7c3aed;
+}
+
+.event-card button:hover{
+    background-color:#6d28d9;
+}
+
+.event-card .cancel-btn{
+    background-color:#ede9fe;
+    color:#5b21b6;
+    border:1.5px solid #c4b5fd;
+}
+
+.event-card .cancel-btn:hover{
+    background-color:#ddd6fe;
+}
+
+.event-card .view-btn{
+    background-color:#7c3aed;
+    color:#fff;
+}
+
+.event-card .view-btn:hover{
+    background-color:#6d28d9;
+}
+
+.registration-item{
+    border:1.5px solid #ddd6fe;
+    border-radius:9px;
+    padding:13px 16px;
+    margin-bottom:10px;
+    background-color:#faf8ff;
+    font-size:13px;
+    color:#4a3580;
+}
+
+.no-data{
+    font-size:13px;
+    color:#a78bfa;
+    margin-top:6px;
+}
+
+#registrationsContainer{
+    font-size:13px;
+    color:#a78bfa;
+}
