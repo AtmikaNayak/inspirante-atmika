@@ -23,7 +23,6 @@ const getAllEvents = (req, res) => {
             });
         }
 
-        // add derived field: fill percentage
         const events = results.map(event => {
             const percentage = (event.registeredCount / event.capacity) * 100;
 
