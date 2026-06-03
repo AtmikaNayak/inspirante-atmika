@@ -14,8 +14,8 @@ The application allows administrators to create and manage college events while 
 
 ## Admin Dashboard
 
-![Admin Dashboard](images/admin1.png)
 ![Admin Dashboard](images/admin2.png)
+![Admin Dashboard](images/admin1.png)
 
 ## Student Dashboard
 
