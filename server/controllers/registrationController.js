@@ -3,7 +3,7 @@ const db = require("../config/db");
 const registerForEvent = (req, res) => {
     const userId = req.user.id;
     const role = req.user.role;
-    const { event_id } = req.body;
+    const { eventId } = req.body;
 
     if (role !== "student") {
         return res.status(403).json({
@@ -13,7 +13,7 @@ const registerForEvent = (req, res) => {
 
     const eventQuery = "SELECT * FROM events WHERE id = ?";
 
-    db.query(eventQuery, [event_id], (err, eventResult) => {
+    db.query(eventQuery, [eventId], (err, eventResult) => {
         if (err) {
             return res.status(500).json({ message: "Database error" });
         }
@@ -30,7 +30,7 @@ const registerForEvent = (req, res) => {
             WHERE event_id = ?
         `;
 
-        db.query(countQuery, [event_id], (err, countResult) => {
+        db.query(countQuery, [eventId], (err, countResult) => {
             if (err) {
                 return res.status(500).json({ message: "Database error" });
             }
@@ -48,7 +48,7 @@ const registerForEvent = (req, res) => {
                 VALUES (?, ?)
             `;
 
-            db.query(insertQuery, [userId, event_id], (err) => {
+            db.query(insertQuery, [userId, eventId], (err) => {
                 if (err) {
                     if (err.code === "ER_DUP_ENTRY") {
                         return res.status(400).json({

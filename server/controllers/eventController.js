@@ -23,6 +23,7 @@ const getAllEvents = (req, res) => {
             });
         }
 
+
         const events = results.map(event => {
             const percentage = (event.registeredCount / event.capacity) * 100;
 
