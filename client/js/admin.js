@@ -91,7 +91,7 @@ async function loadEvents() {
                     <p>Venue: ${event.venue}</p>
                     <p>Capacity: ${event.capacity}</p>
                     <p>Registered: ${event.registeredCount}</p>
-                    <p style="color:${color}">${event.fillPercentage.toFixed(2)}%</p>
+                    <p style="color:${color}">${(event.fillPercentage || 0).toFixed(2)}%</p>
                     <button onclick="viewRegistrations(${event.id})">View Students</button>
                 </div>
             `;
@@ -127,6 +127,14 @@ async function viewRegistrations(eventId) {
 
         registrationsContainer.innerHTML = "";
 
+        registrationsContainer.innerHTML = "";
+
+        if (data.length === 0) {
+            registrationsContainer.innerHTML =
+                "<p>No students have registered for this event yet.</p>";
+            return;
+        }
+
         data.forEach(student => {
 
             registrationsContainer.innerHTML += `
@@ -138,7 +146,7 @@ async function viewRegistrations(eventId) {
             `;
 
         });
-    
+
     } catch (error) {
 
         document.getElementById(
@@ -151,29 +159,34 @@ async function viewRegistrations(eventId) {
     }
 }
 
-async function createEvent(){
-    try{
+async function createEvent() {
+    try {
         const name = document.getElementById("eventName").value;
         const date = document.getElementById("eventDate").value;
-        const venue =document.getElementById("eventVenue").value;
-        const capacity =document.getElementById("eventCapacity").value;
+        const venue = document.getElementById("eventVenue").value;
+        const capacity = document.getElementById("eventCapacity").value;
+
+        if (capacity <= 0) {
+            message.textContent = "Capacity must be greater than 0";
+            return;
+        }
+
         const response = await fetch("http://localhost:3000/api/events",
-                {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                        Authorization: `Bearer ${token}`
-                    },
-                    body: JSON.stringify({
-                        name,
-                        date,
-                        venue,
-                        capacity
-                    })
-                }
-            );
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`
+                },
+                body: JSON.stringify({
+                    name,
+                    date,
+                    venue,
+                    capacity
+                })
+            }
+        );
         const data = await response.json();
-        const message = document.getElementById("message");
         message.textContent = data.message;
         if (response.ok) {
             loadEvents();
@@ -184,7 +197,7 @@ async function createEvent(){
         }
     } catch (error) {
         console.error(error);
-        document.getElementById("message").textContent ="Failed to create event";
+        document.getElementById("message").textContent = "Failed to create event";
     }
 }
 

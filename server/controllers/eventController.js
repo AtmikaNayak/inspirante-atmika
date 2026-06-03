@@ -42,7 +42,13 @@ const createEvent = (req, res) => {
 
     if (!name || !date || !venue || !capacity) {
         return res.status(400).json({
-            messag: "All fields required!"
+            message: "All fields required!"
+        });
+    }
+
+    if (capacity <= 0) {
+        return res.status(400).json({
+            message: "Capacity should be greater than 0!"
         });
     }
 

@@ -18,6 +18,8 @@ const myRegistrationsContainer =
 const message =
     document.getElementById("message");
 
+let registeredEventIds = [];
+
 if (!token || role !== "student") {
     window.location.href =
         "index.html";
@@ -25,9 +27,11 @@ if (!token || role !== "student") {
 
 document.addEventListener(
     "DOMContentLoaded",
-    () => {
-        loadEvents();
-        loadMyRegistrations();
+    async () => {
+
+        await loadMyRegistrations();
+
+        await loadEvents();
     }
 );
 
@@ -61,6 +65,11 @@ async function loadMyRegistrations() {
 
         const data = await response.json();
 
+        registeredEventIds =
+            data.map(
+                registration => registration.id
+            );
+
         if (!response.ok) {
             document.getElementById(
                 "message"
@@ -75,6 +84,12 @@ async function loadMyRegistrations() {
             );
 
         registrationsContainer.innerHTML = "";
+
+        if (data.length === 0) {
+            myRegistrationsContainer.innerHTML =
+                "<p>You have not registered for any events yet.</p>";
+            return;
+        }
 
         data.forEach(registration => {
 
@@ -135,10 +150,38 @@ async function loadEvents() {
 
         data.forEach(event => {
 
-            const buttonHtml =
-                event.registeredCount >= event.capacity
-                    ? `<button disabled>Full</button>`
-                    : `<button onclick="registerForEvent(${event.id})">Register</button>`;
+            let buttonHtml = "";
+
+            if (
+                registeredEventIds.includes(
+                    event.id
+                )
+            ) {
+
+                buttonHtml =
+                    `<button disabled>
+            Already Registered
+        </button>`;
+
+            }
+            else if (
+                event.registeredCount >=
+                event.capacity
+            ) {
+
+                buttonHtml =
+                    `<button disabled>
+            Full
+        </button>`;
+
+            }
+            else {
+
+                buttonHtml =
+                    `<button onclick="registerForEvent(${event.id})">
+            Register
+        </button>`;
+            }
 
             eventsContainer.innerHTML += `
                 <div class="event-card">
