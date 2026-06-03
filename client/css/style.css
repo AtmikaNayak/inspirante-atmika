@@ -1,739 +1,326 @@
 /* ============================================================
-   College Event Registration Portal — style.css
-   Clean professional design: split login, dark sidebar dashboards
-   Plain CSS only, no imports, no root/media queries
+   Base & Reset (Plain CSS, No variables, No imports, No complex CSS)
    ============================================================ */
-
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: Georgia, 'Times New Roman', serif;
+    font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 }
 
 body {
-    background-color: #f0f4f8;
-    color: #1a2233;
-    min-height: 100vh;
+    background-color: #f3f4f6; /* Soft professional gray */
+    color: #374151; /* Dark Slate text */
 }
 
-/* ============================================================
-   LOGIN PAGE  (index.html)
-   Split layout: left hero panel + right form
-   ============================================================ */
-
-/* The container on index.html acts as the full-screen split */
-body:has(#loginBtn) {
-    background-color: #f0f4f8;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-    padding: 0;
-}
-
-body:has(#loginBtn) .container {
-    width: 100%;
-    max-width: 1100px;
-    min-height: 580px;
-    margin: 40px auto;
-    background: #fff;
-    border-radius: 20px;
-    border: none;
-    box-shadow: 0 8px 48px rgba(30, 58, 138, 0.13);
-    padding: 0;
-    display: flex;
-    overflow: hidden;
-}
-
-/* Left hero panel — pseudo-element background */
-body:has(#loginBtn) .container::before {
-    content: '';
-    display: block;
-    width: 48%;
-    min-width: 300px;
-    background: linear-gradient(145deg, #1e3a8a 0%, #1d4ed8 60%, #2563eb 100%);
-    flex-shrink: 0;
-    position: relative;
-}
-
-/* We can't inject elements, so we overlay the login-box to sit right */
-body:has(#loginBtn) .container {
-    position: relative;
-}
-
-/* Actual approach: make the container a flex row by styling h2 and login-box */
-body:has(#loginBtn) h2#login-header {
-    display: none; /* hide—we'll show it inside the right panel */
-}
-
-/* Since we can't split without changing HTML, we simulate with a gradient background on the container */
-body:has(#loginBtn) .container {
-    background: linear-gradient(to right, #1e3a8a 0%, #1e3a8a 45%, #fff 45%);
-    padding: 0;
-    display: flex;
-    align-items: stretch;
-    min-height: 600px;
-}
-
-body:has(#loginBtn) .login-box {
-    width: 55%;
-    margin-left: 45%;
-    padding: 60px 56px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    background: #fff;
-}
-
-/* Fake hero content via the container's before */
-body:has(#loginBtn) .container::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 45%;
-    height: 100%;
-    background: linear-gradient(145deg, #1e3a8a 0%, #1d4ed8 70%, #3b82f6 100%);
-    border-radius: 20px 0 0 20px;
-    z-index: 0;
-}
-
-/* Hero text overlay — use h2 as the hero title */
-body:has(#loginBtn) h2#login-header {
-    display: block;
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 45%;
-    height: 100%;
-    z-index: 1;
-    color: #fff;
-    font-size: 28px;
-    font-weight: 700;
-    font-family: Georgia, serif;
-    padding: 60px 44px;
-    display: flex;
-    align-items: flex-start;
-    flex-direction: column;
-    justify-content: center;
-    pointer-events: none;
-    line-height: 1.3;
-}
-
-/* Label styling */
-body:has(#loginBtn) label {
-    font-size: 13px;
-    font-weight: 600;
-    color: #374151;
-    margin-bottom: 6px;
-    display: block;
-    font-family: Arial, Helvetica, sans-serif;
-    letter-spacing: 0.3px;
-}
-
-/* Inputs on login */
-body:has(#loginBtn) input[type="text"],
-body:has(#loginBtn) input[type="password"] {
-    width: 100%;
-    padding: 13px 16px;
-    font-size: 14px;
-    font-family: Arial, Helvetica, sans-serif;
-    border: 1.5px solid #d1d5db;
-    border-radius: 10px;
-    outline: none;
-    margin-bottom: 18px;
-    color: #1a2233;
-    background-color: #f9fafb;
-    transition: border-color 0.2s, box-shadow 0.2s;
-}
-
-body:has(#loginBtn) input[type="text"]:focus,
-body:has(#loginBtn) input[type="password"]:focus {
-    border-color: #1d4ed8;
-    box-shadow: 0 0 0 3px rgba(29, 78, 216, 0.1);
-    background: #fff;
-}
-
-body:has(#loginBtn) input[type="text"]:hover,
-body:has(#loginBtn) input[type="password"]:hover {
-    border-color: #6b7280;
-}
-
-/* Login button */
-body:has(#loginBtn) button#loginBtn {
-    width: 100%;
-    padding: 14px;
-    font-size: 15px;
-    font-weight: 700;
-    font-family: Arial, Helvetica, sans-serif;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    background: linear-gradient(135deg, #1e3a8a, #2563eb);
-    color: #fff;
-    margin-top: 4px;
-    letter-spacing: 0.5px;
-    transition: opacity 0.2s, transform 0.1s;
-}
-
-body:has(#loginBtn) button#loginBtn:hover {
-    opacity: 0.92;
-    transform: translateY(-1px);
-}
-
-/* Error message */
-#message.error,
-body:has(#loginBtn) #message {
-    font-size: 13px;
-    color: #dc2626;
-    margin-top: 10px;
-    font-family: Arial, Helvetica, sans-serif;
-    text-align: center;
-}
-
-/* ============================================================
-   DASHBOARD PAGES  (admin.html / student.html)
-   Dark sidebar + main content area
-   ============================================================ */
-
-/* When NOT on login page */
-body:not(:has(#loginBtn)) {
-    background-color: #f0f4f8;
-    min-height: 100vh;
-    display: block;
-}
-
-body:not(:has(#loginBtn)) .container {
-    width: 100%;
-    max-width: 100%;
-    margin: 0;
-    background: transparent;
-    border-radius: 0;
-    border: none;
-    box-shadow: none;
-    padding: 0;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-}
-
-/* Top bar — acts as a header bar */
-.top-bar {
-    background: #fff;
-    border-bottom: 1px solid #e5e7eb;
-    padding: 0 36px;
-    height: 60px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    box-shadow: 0 1px 6px rgba(30, 58, 138, 0.07);
-    width: 100%;
-}
-
-.top-bar h1 {
-    font-size: 18px;
-    font-weight: 700;
-    color: #1e3a8a;
-    font-family: Georgia, serif;
-    margin: 0;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-/* Graduation cap icon before dashboard titles */
-.top-bar h1::before {
-    content: '';
-    display: inline-block;
-    width: 28px;
-    height: 28px;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%231e3a8a'%3E%3Cpath d='M12 3L1 9l11 6 9-4.91V17h2V9L12 3zM5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82z'/%3E%3C/svg%3E");
-    background-size: contain;
-    background-repeat: no-repeat;
-}
-
-/* Logout button */
-#logoutBtn {
-    width: auto;
-    padding: 8px 20px;
-    font-size: 13px;
-    font-weight: 600;
-    font-family: Arial, Helvetica, sans-serif;
-    background: transparent;
-    color: #374151;
-    border: 1.5px solid #d1d5db;
-    border-radius: 8px;
-    cursor: pointer;
-    margin: 0;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    transition: background 0.18s, border-color 0.18s;
-}
-
-#logoutBtn::before {
-    content: '';
-    display: inline-block;
-    width: 14px;
-    height: 14px;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23374151' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4'/%3E%3Cpolyline points='16 17 21 12 16 7'/%3E%3Cline x1='21' y1='12' x2='9' y2='12'/%3E%3C/svg%3E");
-    background-size: contain;
-    background-repeat: no-repeat;
-}
-
-#logoutBtn:hover {
-    background: #f3f4f6;
-    border-color: #9ca3af;
-}
-
-/* Main content area (below top-bar) */
-body:not(:has(#loginBtn)) .container > hr {
+hr {
     display: none;
 }
 
-/* Sections */
+h2 {
+    color: #111827; 
+    margin-bottom: 18px;
+    font-size: 22px;
+    border-bottom: 2px solid #0f766e; /* Teal accent */
+    padding-bottom: 8px;
+    display: inline-block;
+}
+
+/* ============================================================
+   TOP NAVBAR (Fixed at the top, Dark Slate & Teal)
+   ============================================================ */
+.top-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 70px;
+    background-color: #1f2937; /* Dark Slate */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 40px;
+    z-index: 1000;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    border-bottom: 3px solid #0f766e; /* Teal accent */
+}
+
+.top-bar h1 {
+    color: #ffffff;
+    font-size: 24px;
+    letter-spacing: 1px;
+}
+
+#logoutBtn {
+    background-color: #be123c; /* Crimson Red */
+    color: #ffffff;
+    border: none;
+    padding: 10px 24px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 15px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    transition: background-color 0.2s;
+}
+
+#logoutBtn:hover {
+    background-color: #9f1239;
+}
+
+/* ============================================================
+   CONTAINER & DASHBOARD SECTIONS
+   ============================================================ */
+.container {
+    padding-top: 100px; 
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-bottom: 40px;
+}
+
 .create-event,
 .events-list,
 .view-registrations,
 .upcoming-events,
 .my-registrations {
-    background: #fff;
-    border-radius: 14px;
-    padding: 28px 32px;
-    margin: 20px 32px;
-    box-shadow: 0 2px 12px rgba(30, 58, 138, 0.06);
+    background-color: #ffffff;
+    border-radius: 12px;
+    padding: 35px;
+    margin-bottom: 35px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.04);
     border: 1px solid #e5e7eb;
 }
 
-/* Section headings */
-h2 {
-    font-size: 17px;
-    font-weight: 700;
-    color: #1e3a8a;
-    margin-bottom: 20px;
-    font-family: Georgia, serif;
-    display: flex;
-    align-items: center;
-    gap: 8px;
+/* ============================================================
+   LOGIN PAGE
+   ============================================================ */
+#login-header {
+    text-align: center;
+    font-size: 32px;
+    margin-top: 60px;
+    color: #1f2937;
+    border: none;
+    display: block;
 }
 
-/* Icon before Create Event */
-.create-event h2::before {
+/* Lock Icon for Login */
+#login-header::before {
     content: '';
-    display: inline-block;
-    width: 18px;
-    height: 18px;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231e3a8a' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='10'/%3E%3Cline x1='12' y1='8' x2='12' y2='16'/%3E%3Cline x1='8' y1='12' x2='16' y2='12'/%3E%3C/svg%3E");
+    display: block;
+    width: 60px;
+    height: 60px;
+    margin: 0 auto 15px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230f766e' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='11' width='18' height='11' rx='2' ry='2'/%3E%3Cpath d='M7 11V7a5 5 0 0 1 10 0v4'/%3E%3C/svg%3E");
     background-size: contain;
     background-repeat: no-repeat;
-    flex-shrink: 0;
 }
 
-.events-list h2::before,
-.upcoming-events h2::before {
-    content: '';
-    display: inline-block;
-    width: 18px;
-    height: 18px;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231e3a8a' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='4' width='18' height='18' rx='2' ry='2'/%3E%3Cline x1='16' y1='2' x2='16' y2='6'/%3E%3Cline x1='8' y1='2' x2='8' y2='6'/%3E%3Cline x1='3' y1='10' x2='21' y2='10'/%3E%3C/svg%3E");
-    background-size: contain;
-    background-repeat: no-repeat;
-    flex-shrink: 0;
-}
-
-.view-registrations h2::before,
-.my-registrations h2::before {
-    content: '';
-    display: inline-block;
-    width: 18px;
-    height: 18px;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231e3a8a' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2'/%3E%3Ccircle cx='9' cy='7' r='4'/%3E%3Cpath d='M23 21v-2a4 4 0 0 0-3-3.87'/%3E%3Cpath d='M16 3.13a4 4 0 0 1 0 7.75'/%3E%3C/svg%3E");
-    background-size: contain;
-    background-repeat: no-repeat;
-    flex-shrink: 0;
+.login-box {
+    width: 100%;
+    max-width: 480px; 
+    margin: 20px auto; 
+    padding: 50px 40px;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.08);
+    border-top: 6px solid #0f766e; 
 }
 
 /* ============================================================
-   FORM INPUTS (dashboard pages)
+   FORMS & INPUTS (Stacked fully below headings)
    ============================================================ */
+label {
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    display: block;
+    color: #4b5563;
+}
 
 input[type="text"],
 input[type="password"],
 input[type="date"],
 input[type="number"] {
-    padding: 11px 14px;
-    font-size: 14px;
-    font-family: Arial, Helvetica, sans-serif;
-    border: 1.5px solid #d1d5db;
-    border-radius: 9px;
-    outline: none;
-    margin-bottom: 14px;
-    color: #1a2233;
-    background-color: #f9fafb;
     width: 100%;
-    transition: border-color 0.2s, box-shadow 0.2s;
+    padding: 12px 15px;
+    margin-bottom: 20px;
+    border: 2px solid #e5e7eb;
+    border-radius: 6px;
+    font-size: 15px;
+    background-color: #f9fafb;
+    color: #1f2937;
+    outline: none;
+    display: block;
+    transition: border-color 0.2s, background-color 0.2s;
 }
 
 input[type="text"]:focus,
 input[type="password"]:focus,
 input[type="date"]:focus,
 input[type="number"]:focus {
-    border-color: #1d4ed8;
-    box-shadow: 0 0 0 3px rgba(29, 78, 216, 0.1);
-    background: #fff;
+    border-color: #0f766e; /* Teal */
+    background-color: #ffffff;
 }
-
-input[type="text"]:hover,
-input[type="password"]:hover,
-input[type="date"]:hover,
-input[type="number"]:hover {
-    border-color: #6b7280;
-}
-
-label {
-    font-size: 13px;
-    font-weight: 600;
-    color: #374151;
-    display: block;
-    margin-bottom: 5px;
-    font-family: Arial, Helvetica, sans-serif;
-}
-
-/* Create Event row layout hint — inputs sit side by side via flex in create-event */
-.create-event {
-    display: block;
-}
-
-.create-event input {
-    display: inline-block;
-    width: calc(25% - 12px);
-    margin-right: 12px;
-    margin-bottom: 0;
-    vertical-align: top;
-}
-
-.create-event input:last-of-type {
-    margin-right: 0;
-}
-
-/* ============================================================
-   BUTTONS
-   ============================================================ */
 
 button {
-    padding: 11px 22px;
-    font-size: 14px;
-    font-weight: 600;
-    font-family: Arial, Helvetica, sans-serif;
+    padding: 12px 20px;
+    background-color: #1f2937; 
+    color: #ffffff;
     border: none;
-    border-radius: 9px;
+    border-radius: 6px;
     cursor: pointer;
-    background: linear-gradient(135deg, #1e3a8a, #2563eb);
-    color: #fff;
-    transition: opacity 0.18s, transform 0.1s;
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
+    font-weight: bold;
+    font-size: 15px;
+    letter-spacing: 0.5px;
+    transition: background-color 0.2s;
 }
 
 button:hover {
-    opacity: 0.88;
-    transform: translateY(-1px);
+    background-color: #374151;
 }
 
-#createEventBtn {
-    background: linear-gradient(135deg, #15803d, #16a34a);
-    padding: 11px 24px;
-    vertical-align: top;
-    margin-bottom: 0;
-    margin-top: 0;
-    width: auto;
+#createEventBtn, #loginBtn {
+    background-color: #0f766e; 
 }
 
-#createEventBtn::before {
-    content: '';
-    display: inline-block;
-    width: 14px;
-    height: 14px;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cline x1='12' y1='5' x2='12' y2='19'/%3E%3Cline x1='5' y1='12' x2='19' y2='12'/%3E%3C/svg%3E");
-    background-size: contain;
-    background-repeat: no-repeat;
+#createEventBtn:hover, #loginBtn:hover {
+    background-color: #0d9488;
 }
-
-#createEventBtn:hover {
-    opacity: 0.9;
-}
-
-/* ============================================================
-   MESSAGES
-   ============================================================ */
 
 #message {
-    font-size: 13px;
-    margin-top: 10px;
-    color: #dc2626;
-    font-family: Arial, Helvetica, sans-serif;
-    display: block;
+    color: #be123c;
+    margin-top: 15px;
+    font-size: 15px;
     text-align: center;
+    font-weight: bold;
 }
 
 /* ============================================================
-   EVENT CARDS  (student upcoming events)
+   GRID SYSTEM (Events, My Registrations, Admin Registrations)
    ============================================================ */
-
 #eventsContainer,
 #myRegistrationsContainer,
 #registrationsContainer {
-    margin-top: 4px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr; /* 3 blocks per row */
+    grid-gap: 25px;
+    margin-top: 20px;
 }
 
-.event-card {
-    border: 1.5px solid #e5e7eb;
-    border-radius: 14px;
-    padding: 20px 22px;
-    margin-bottom: 14px;
-    background-color: #f9fafb;
-    transition: box-shadow 0.2s, border-color 0.2s;
-    position: relative;
-}
-
-.event-card:hover {
-    box-shadow: 0 4px 20px rgba(30, 58, 138, 0.1);
-    border-color: #93c5fd;
-}
-
-.event-card h3 {
-    font-size: 15px;
-    font-weight: 700;
-    color: #1e3a8a;
-    margin-bottom: 10px;
-    font-family: Georgia, serif;
-}
-
-.event-card p {
-    font-size: 13px;
-    color: #4b5563;
-    margin-bottom: 5px;
-    font-family: Arial, Helvetica, sans-serif;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-}
-
-/* Calendar icon for date */
-.event-card p:nth-of-type(1)::before {
-    content: '';
-    display: inline-block;
-    width: 13px;
-    height: 13px;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='4' width='18' height='18' rx='2' ry='2'/%3E%3Cline x1='16' y1='2' x2='16' y2='6'/%3E%3Cline x1='8' y1='2' x2='8' y2='6'/%3E%3Cline x1='3' y1='10' x2='21' y2='10'/%3E%3C/svg%3E");
-    background-size: contain;
-    background-repeat: no-repeat;
-    flex-shrink: 0;
-}
-
-/* Location icon for venue */
-.event-card p:nth-of-type(2)::before {
-    content: '';
-    display: inline-block;
-    width: 13px;
-    height: 13px;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z'/%3E%3Ccircle cx='12' cy='10' r='3'/%3E%3C/svg%3E");
-    background-size: contain;
-    background-repeat: no-repeat;
-    flex-shrink: 0;
-}
-
-/* Seats icon */
-.event-card p:nth-of-type(3)::before {
-    content: '';
-    display: inline-block;
-    width: 13px;
-    height: 13px;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2'/%3E%3Ccircle cx='9' cy='7' r='4'/%3E%3Cpath d='M23 21v-2a4 4 0 0 0-3-3.87'/%3E%3Cpath d='M16 3.13a4 4 0 0 1 0 7.75'/%3E%3C/svg%3E");
-    background-size: contain;
-    background-repeat: no-repeat;
-    flex-shrink: 0;
-}
-
-.event-card button {
-    width: auto;
-    padding: 8px 18px;
-    font-size: 13px;
-    margin-top: 12px;
-    margin-right: 8px;
-    border-radius: 8px;
-    background: linear-gradient(135deg, #1e3a8a, #2563eb);
-    color: #fff;
-    letter-spacing: 0.2px;
-}
-
-.event-card button:hover {
-    opacity: 0.88;
-}
-
-.event-card .cancel-btn {
-    background: transparent;
-    color: #dc2626;
-    border: 1.5px solid #fca5a5;
-    padding: 7px 18px;
-}
-
-.event-card .cancel-btn:hover {
-    background: #fef2f2;
-    border-color: #dc2626;
-}
-
-.event-card .view-btn {
-    background: linear-gradient(135deg, #1e3a8a, #2563eb);
-    color: #fff;
-}
-
-/* ============================================================
-   REGISTRATION TABLE ITEMS
-   ============================================================ */
-
+/* Unified styling for both Event Cards and Registration Items */
+.event-card,
 .registration-item {
-    border: 1.5px solid #e5e7eb;
+    background-color: #ffffff;
+    border: 1px solid #e5e7eb;
     border-radius: 10px;
-    padding: 14px 18px;
+    padding: 22px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.03);
+    border-left: 5px solid #1f2937; /* Slate left border */
+    transition: transform 0.2s, box-shadow 0.2s, border-left-color 0.2s;
+}
+
+/* Interactive Hover effect for cards */
+.event-card:hover,
+.registration-item:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
+    border-left-color: #0f766e; /* Switches to Teal on hover */
+}
+
+/* Typography inside the blocks */
+.event-card h3,
+.registration-item h3,
+.registration-item strong {
+    color: #111827;
+    margin-bottom: 12px;
+    font-size: 19px;
+    display: block;
+}
+
+.event-card p,
+.registration-item p {
+    font-size: 15px;
+    color: #4b5563;
     margin-bottom: 10px;
-    background-color: #f9fafb;
-    font-size: 13px;
-    color: #374151;
-    font-family: Arial, Helvetica, sans-serif;
+    line-height: 1.4;
 }
 
-.no-data {
-    font-size: 13px;
-    color: #9ca3af;
-    margin-top: 8px;
-    font-family: Arial, Helvetica, sans-serif;
+/* Buttons inside the cards */
+.event-card button,
+.registration-item button {
+    margin-top: 15px;
+    margin-right: 10px;
+    padding: 8px 16px;
+    font-size: 14px;
 }
 
-#registrationsContainer {
-    font-size: 13px;
-    color: #9ca3af;
-    font-family: Arial, Helvetica, sans-serif;
+.cancel-btn {
+    background-color: #be123c !important;
 }
 
-/* ============================================================
-   HR SEPARATORS  (hidden in dashboards, shown in login)
-   ============================================================ */
-
-hr {
-    border: none;
-    border-top: 1px solid #e5e7eb;
-    margin: 0;
+.cancel-btn:hover {
+    background-color: #9f1239 !important;
 }
 
 /* ============================================================
-   ADMIN TABLE STYLING
-   (JS-generated tables in admin eventsContainer)
+   STATUS BADGES (For student registrations if applicable)
    ============================================================ */
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 13.5px;
-    font-family: Arial, Helvetica, sans-serif;
-}
-
-thead {
-    background: #f1f5f9;
-}
-
-thead th {
-    text-align: left;
-    padding: 11px 14px;
-    font-weight: 700;
-    color: #374151;
-    font-size: 12px;
-    text-transform: uppercase;
-    letter-spacing: 0.6px;
-    border-bottom: 2px solid #e5e7eb;
-}
-
-tbody tr {
-    border-bottom: 1px solid #f3f4f6;
-    transition: background 0.15s;
-}
-
-tbody tr:hover {
-    background: #f8fafc;
-}
-
-tbody td {
-    padding: 11px 14px;
-    color: #374151;
-    vertical-align: middle;
-}
-
-/* View button in table */
-tbody td button {
-    padding: 6px 14px;
-    font-size: 12px;
-    border-radius: 6px;
-    margin-right: 6px;
-    background: linear-gradient(135deg, #1e40af, #2563eb);
-}
-
-/* Delete button */
-tbody td button.delete-btn,
-tbody td button:last-child {
-    background: linear-gradient(135deg, #b91c1c, #dc2626);
-}
-
-/* ============================================================
-   STATUS BADGES
-   ============================================================ */
-
 .status-registered,
 span.registered {
     display: inline-block;
-    padding: 3px 10px;
-    background: #dcfce7;
-    color: #15803d;
+    padding: 4px 12px;
+    background-color: #ccfbf1; /* Light Teal background */
+    color: #0f766e; /* Teal text */
     border-radius: 20px;
-    font-size: 11px;
-    font-weight: 700;
-    font-family: Arial, Helvetica, sans-serif;
-    letter-spacing: 0.3px;
+    font-size: 12px;
+    font-weight: bold;
+    margin-top: 5px;
+    letter-spacing: 0.5px;
 }
 
 .status-pending,
 span.pending {
     display: inline-block;
-    padding: 3px 10px;
-    background: #fef9c3;
-    color: #a16207;
+    padding: 4px 12px;
+    background-color: #fef3c7; /* Light Amber */
+    color: #b45309; /* Dark Amber */
     border-radius: 20px;
-    font-size: 11px;
-    font-weight: 700;
-    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    font-weight: bold;
+    margin-top: 5px;
+    letter-spacing: 0.5px;
 }
 
 /* ============================================================
-   SCROLLBAR (subtle)
+   FALLBACK TABLE STYLING 
+   (If JS generates a table instead of divs for Admin Registrations)
    ============================================================ */
-
-::-webkit-scrollbar {
-    width: 6px;
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.02);
 }
 
-::-webkit-scrollbar-track {
-    background: #f1f5f9;
+th, td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #e5e7eb;
+    font-size: 15px;
 }
 
-::-webkit-scrollbar-thumb {
-    background: #c7d2fe;
-    border-radius: 3px;
+th {
+    background-color: #f3f4f6;
+    color: #111827;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 13px;
+    letter-spacing: 0.5px;
 }
 
-::-webkit-scrollbar-thumb:hover {
-    background: #818cf8;
+tr:hover {
+    background-color: #f9fafb;
 }
