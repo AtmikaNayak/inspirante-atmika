@@ -6,6 +6,22 @@ A full-stack web application developed as part of the Inspirante Web Development
 
 The application allows administrators to create and manage college events while enabling students to browse and register for upcoming events.
 
+# College Event Registration System
+
+## Login Page
+
+![Login Page](images/login.png)
+
+## Admin Dashboard
+
+![Admin Dashboard](images/admin1.png)
+![Admin Dashboard](images/admin2.png)
+
+## Student Dashboard
+
+![Student Dashboard](images/student1.png)
+![Student Dashboard](images/student2.png)
+
 ---
 
 # Features
